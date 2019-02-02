@@ -1,10 +1,33 @@
 import random
-pas=open("Data.txt","a")
 
 StrH="QWERTYUIOPASDFGHJKLZXCVBNM"
 StrL="qwertyuiopasdfghjklzxcvbnm"
 Num="1234567890"
 Special="@#&"
+
+
+def encrypt(str,key):
+    rt=""
+    y=0
+
+    for i in range(len(str)):
+        if(y>len(key)-1):
+            y=0
+        rt=rt+chr(ord(str[i])+ord(key[y]))
+        y=y+1
+
+    return rt
+def decrypt(str,key):
+    rt=""
+    y=0
+    for i in range(len(str)):
+        if(y>len(key)-1):
+            y=0
+        rt=rt+chr(ord(str[i])-ord(key[y]))
+        y=y+1
+    return rt
+
+
 
 def Passw(Length):
     nu=random.randint(4,Length-4)
@@ -15,24 +38,74 @@ def Passw(Length):
     password=password + ''.join(random.choice(Num) for i in range(3))
     return password
 
-print("")
-print("Enter name of website")
-web=input()
-print("")
-print("Enter length of password min 8")
-print("")
-n=int(input())
-if n < 8:
-    print("Password cant be less than 8 ")
-    exit("Error")
-while True:
-    y=''.join(random.sample(Passw(n),n))
-    print("Password generated is " +y )
-    print("ok ? y/n")
-    if input()=="y":
-        break
-    else:
-        continue
+try:
+    pas=open("data.en","r")
+except:
+    pas=open("data.en","a")
+    print("This program is runnning first time in this directory please set a main password")
+    mai=input("\t")
+    pas.write(encrypt(mai,mai))
+    pas.close()
+    exit("\tPlease restart Program")
 
-pas.write("\n\nWebsite  : "+web + "\n" + "Pass \t : "+ y )
 pas.close()
+
+pa=open("data.en","r" , encoding="ISO-8859-1")
+y=pa.read().split("\n")[0]
+print("\tPlease enter password\n ")
+test=input("\t")
+if not (y==encrypt(test,test)):
+    exit("\n\tpassword wrong")
+pa.close()
+
+while True:
+    print("\n\tEnter choice \n\ta: Create new password \n\tb: Search for password \n\tc: Exit program \n")
+    y=input("\t")
+    if (y=="a"):
+        pa=open("data.en","a",  encoding="ISO-8859-1")
+        print("\tEnter name of website \n")
+        web=input("\t")
+        print("\tEnter length of password min 8")
+
+        while True:
+            try:
+                n=int(input("\t"))
+                break
+            except:
+                print("\tPlease enter integer")
+                continue
+
+        if n < 8:
+            print("\tPassword cant be less than 8 ")
+            exit("\t\tERROR")
+        while True:
+            y=''.join(random.sample(Passw(n),n))
+            print("\tPassword generated is " +y )
+            print("\tok ? y/n")
+            if input("\t").lower()=="y":
+                break
+            else:
+                continue
+
+        pa.write(encrypt(web.upper(),test)+" "+ encrypt(y,test)+"\n")
+        pa.close()
+
+    elif(y=="b"):
+        print("\tTo break the Loop enter exit\n\n")
+        while True:
+            pa=open("data.en","r",encoding="ISO-8859-1")
+            print("\tWebsite name to search for \n")
+            f=input("\t").upper()
+            if f=="EXIT":
+                break
+            f=encrypt(f,test)
+            if (f in open("data.en","r",encoding="ISO-8859-1").read()):
+                for line in pa :
+                    if (line.split()[0]==f):
+                        print("\n\tpassword of website is " + decrypt(line.split()[1],test)+"\n")
+            else:
+                print("\n\twebsite not in database")
+                break
+
+    else:
+        exit("\n\n\n\t\tThank you")
