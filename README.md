@@ -7,6 +7,8 @@ This program  has the ability to detect wether it has any data in ditectory in w
 
 This program can be use my multiple user on same device  by just running it in different directory
 
+No use of any external library is used for encryption which allow this program to even run on device without pyencrypt library and other.
+
 
 Update:
 A master password feature so that only authorised people can access coming soon , also with encryption based on master password 
