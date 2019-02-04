@@ -2,8 +2,7 @@
 
 ![alt text](https://raw.githubusercontent.com/hvijaycse/Password-Generator/master/working.PNG)
 
-
-===============================================================================================================================================
+==================================================================================
 
 1.) This is a simple python based program which everytime used will create a random string of required lenght and also store it in  a file in encypted form  ,You just need to remeber a  single password of the program and every other passsword will be managed by my program
 
