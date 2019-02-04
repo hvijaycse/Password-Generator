@@ -41,12 +41,14 @@ def Passw(Length):
 try:
     pas=open("data.en","r")
 except:
-    pas=open("data.en","a")
+    pas=open("data.en","a",encoding="ISO-8859-1")
     print("This program is runnning first time in this directory please set a main password")
     mai=input("\t")
-    pas.write(encrypt(mai,mai))
+    pas.write(encrypt(mai,mai)+"\n")
     pas.close()
-    exit("\tPlease restart Program")
+    print("Please restart the program ")
+    input()
+    exit()
 
 pas.close()
 
@@ -55,7 +57,9 @@ y=pa.read().split("\n")[0]
 print("\tPlease enter password\n ")
 test=input("\t")
 if not (y==encrypt(test,test)):
-    exit("\n\tpassword wrong")
+    print("\n\tPassword Wrong")
+    input()
+    exit()
 pa.close()
 
 while True:
