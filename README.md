@@ -16,5 +16,4 @@
 5.) No use of any external library is used for encryption which allow this program to even run on device without pyencrypt library and other.
 
 
-Update:
-A master password feature so that only authorised people can access coming soon , also with encryption based on master password 
+Upcoming :- A better interface with GUI and a better database handling , more user frinedly .
